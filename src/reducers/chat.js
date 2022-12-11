@@ -27,14 +27,6 @@ export const sendMessageReducer = (state = { messages: {} }, action) => {
         messages: action.payload,
         newMessage: true,
       };
-
-    case SEND_MESSAGE_SUCCESS:
-      return {
-        progress: 100,
-        loading: false,
-        messages: [],
-        newMessage: false,
-      };
     case SEND_MESSAGE_FAIL:
       return {
         progress: 100,
