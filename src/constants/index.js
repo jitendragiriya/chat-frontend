@@ -1,5 +1,5 @@
-export const BASE_URL = "https://chat-backend.up.railway.app";
+export const BASE_URL = "https://chat-backend-cle6.onrender.com";
 
 export const TOKEN = "log_data"
 
-export const ENDPOINT = "https://chat-backend.up.railway.app"
+export const ENDPOINT = "https://chat-backend-cle6.onrender.com"
