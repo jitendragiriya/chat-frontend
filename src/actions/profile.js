@@ -1,21 +1,20 @@
 import axios from "axios";
-import { BASE_URL, TOKEN } from "../constants";
+import { TOKEN } from "../constants";
 import {
   UPDATE_PROFILE_FAIL,
   UPDATE_PROFILE_REQUEST,
   UPDATE_PROFILE_SUCCESS,
-} from "../constants/profile";
-import { getLocalData } from "../hooks/localStorage";
+} from "../constants/profile"; 
 
 // update profile
 export const updateProfileAction = (formData) => async (dispatch) => {
-  const url = `${BASE_URL}/api/profile/update`;
+  const url = `${process.env.BASE_URL}/api/profile/update`;
   try {
     dispatch({ type: UPDATE_PROFILE_REQUEST });
     const { data } = await axios.put(url, formData, {
       headers: {
         "Content-Type": "application/json",
-        "x-auth-token": await getLocalData(TOKEN),
+        "token": localStorage.getItem(TOKEN),
       },
       withCredentials: true,
     });

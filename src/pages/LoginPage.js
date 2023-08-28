@@ -8,8 +8,7 @@ import { connect } from "react-redux";
 import { notifyError, notifySuccess } from "../utils/Messages";
 import Spinner from "../loader/Spinner";
 import { GENERATE_OTP_RESET } from "../constants/auth";
-import { HOME_PAGE, VERIFY_EMAIL } from "../constants/urls";
-import { setLocalData } from "../hooks/localStorage";
+import { HOME_PAGE, VERIFY_EMAIL } from "../constants/urls"; 
 import { TOKEN } from "../constants";
 
 const LoginPage = (props) => {
@@ -34,7 +33,7 @@ const LoginPage = (props) => {
   useEffect(() => {
     if (props.auth && props.auth.message && props.auth.message.message) {
       notifySuccess(props.auth.message.message);
-      setLocalData(TOKEN, email);
+      localStorage.setItem(TOKEN, email);
       props.reset();
       navigate(VERIFY_EMAIL);
     }

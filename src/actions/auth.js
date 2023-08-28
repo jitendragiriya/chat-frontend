@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BASE_URL, TOKEN } from "../constants";
+import { TOKEN } from "../constants";
 import {
   AUTH_REQUEST,
   AUTH_SUCCESS,
@@ -12,7 +12,7 @@ import { getLocalData } from "../hooks/localStorage";
 
 // login with otp
 export const loginWithOTPAction = (email) => async (dispatch) => {
-  const url = `${BASE_URL}/api/login`;
+  const url = `${process.env.BASE_URL}/api/login`;
   try {
     dispatch({ type: GENERATE_OTP_REQUEST });
     const { data } = await axios.post(
@@ -41,12 +41,13 @@ export const loginWithOTPAction = (email) => async (dispatch) => {
 export const authUser = () => async (dispatch) => {
   const token = await getLocalData(TOKEN);
   if (token) {
-    const url = `${BASE_URL}/api/auth`;
+    const url = `${process.env.BASE_URL}/api/auth`;
     try {
       dispatch({ type: AUTH_REQUEST });
       const { data } = await axios.get(url, {
         headers: {
           "Content-Type": "application/json",
+          token: localStorage.getItem(TOKEN),
         },
         withCredentials: true,
       });

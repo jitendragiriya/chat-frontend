@@ -3,36 +3,34 @@ import { useEffect } from "react";
 import { clearError } from "../actions/clearError";
 import { verifyEmail } from "../actions/verifyEmail";
 import { TOKEN } from "../constants";
-import {
-  getLocalData,
-  removeLocalData,
-  setLocalData,
-} from "../hooks/localStorage";
+import { getLocalData, removeLocalData } from "../hooks/localStorage";
 import Spinner from "../loader/Spinner";
 import { notifyError, notifySuccess } from "../utils/Messages";
 import MetaData from "../utils/MetaData";
 import { connect } from "react-redux";
 import { VERIFY_EMAIL_RESET } from "../constants/auth";
 import { useNavigate } from "react-router-dom";
-import { HOME_PAGE } from "../constants/urls"; 
+import { HOME_PAGE } from "../constants/urls";
 import { authUser } from "../actions/auth";
 
 const EmailVerification = (props) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
-  //get email from localStorage
-  const getEmailFromLocalStorge = async () => {
-    const myEmail = await getLocalData(TOKEN);
+
+  useEffect(() => {
+    const myEmail = localStorage.getItem(TOKEN);
     if (myEmail) {
       setEmail(myEmail);
     }
-  };
-  useEffect(() => {
-    getEmailFromLocalStorge();
   }, []);
 
   //submit otp with email address
+  /**
+   * 
+   * @param {string} e - for stop defalt behaviour of html
+   * @returns 
+   */
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!otp || otp.length < 6 || otp.length > 6) {
@@ -54,8 +52,7 @@ const EmailVerification = (props) => {
   useEffect(() => {
     if (props.token && props.token.token && props.token.token.length) {
       notifySuccess("You are loggedin now!");
-      removeLocalData(TOKEN);
-      setLocalData(TOKEN, props.token.token);
+      localStorage.setItem(TOKEN, props.token.token);
       props.reset();
       navigate(HOME_PAGE);
     }
@@ -110,7 +107,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   verifyOTP: (data) => dispatch(verifyEmail(data)),
-  auth:()=>dispatch(authUser()),
+  auth: () => dispatch(authUser()),
   reset: () => dispatch({ type: VERIFY_EMAIL_RESET }),
   clear: () => dispatch(clearError()),
 });
