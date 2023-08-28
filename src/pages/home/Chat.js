@@ -6,7 +6,6 @@ import ScrollToBottm from "react-scroll-to-bottom";
 import Messages from "./Messages";
 import { connect, useSelector } from "react-redux";
 import { uid } from "uid";
-import { ENDPOINT } from "../../constants";
 import { getAllMessages, sendMessage } from "../../actions/chat";
 import { clearError } from "../../actions/clearError";
 
@@ -26,7 +25,7 @@ const Chat = (props) => {
   );
 
   useEffect(() => {
-    socket = io(ENDPOINT, { transports: ["websocket"] });
+    socket = io(process.env.BASE_URL, { transports: ["websocket"] });
     socket.on("getMessage", (response) => {
       setMsg((m) => [...m, { ...response, _id: uid(20) }]);
     });
@@ -45,7 +44,7 @@ const Chat = (props) => {
   }, [props.user]);
 
   useEffect(() => {
-    // socket io endpoints
+    // socket io
     socket.on("connect", () => {
       //   // console.log("socket conneted");
     });
