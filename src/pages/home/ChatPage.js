@@ -30,7 +30,7 @@ const ChatPage = (props) => {
       <MetaData title={"Chatapp"} />
       {props.user &&
       props.user.user &&
-      props.user.user.username &&
+      props.user.user.name &&
       props.peoples &&
       props.peoples.peoples &&
       props.peoples.peoples.length ? (

@@ -19,12 +19,12 @@ export const verifyEmail = (formbody) => async (dispatch) => {
     });
     dispatch({
       type: VERIFY_EMAIL_SUCCUSS,
-      payload: data,
+      payload: data?.token,
     });
   } catch (error) {
     dispatch({
       type: VERIFY_EMAIL_FAIL,
-      payload: error.response.data.message,
+      payload: error?.response?.data?.message,
     });
   }
 };

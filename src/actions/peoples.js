@@ -7,14 +7,17 @@ import {
 } from "../constants/user";
 
 //get all peoples
-export const getAllPeoples = (phone) => async (dispatch) => {
+export const getAllPeoples = () => async (dispatch) => {
+  const token = localStorage.getItem(TOKEN);
+  if(typeof token !== "string") return;
+
   const url = `${process.env.REACT_APP_BASE_URL}/api/people/all`;
   try {
     dispatch({ type: GET_ALL_USERS_REQ });
     const { data } = await axios.get(url, {
       headers: {
         "Content-Type": "application/json",
-        "token": localStorage.getItem(TOKEN),
+        token: token,
       },
       withCredentials: true,
     });
@@ -25,7 +28,7 @@ export const getAllPeoples = (phone) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_ALL_USERS_FAIL,
-      payload: error.response.data.message,
+      payload: error?.response?.data?.message,
     });
   }
 };

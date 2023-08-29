@@ -33,7 +33,7 @@ export const sendMessage = (chatData) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: SEND_MESSAGE_FAIL,
-      payload: error.response.data.message,
+      payload: error?.response?.data?.message,
     });
   }
 };
@@ -57,7 +57,7 @@ export const getChatUser = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_CHAT_USER_FAIL,
-      payload: error.response.data.message,
+      payload: error?.response?.data?.message,
     });
   }
 };
@@ -80,7 +80,7 @@ export const getAllMessages = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_MESSAGES_FAIL,
-      payload: error.response.data.message,
+      payload: error?.response?.data?.message,
     });
   }
 };

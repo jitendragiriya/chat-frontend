@@ -141,7 +141,7 @@ const Chat = (props) => {
                   <div className="h-full w-full flex items-center justify-center bg-green-500 capitalize font-bold text-white">
                     {props.otherUser &&
                       props.otherUser.user &&
-                      props.otherUser.user.username.slice(0, 1)}
+                      props.otherUser.user.name.slice(0, 1)}
                   </div>
                 )}
               </div>

@@ -26,7 +26,7 @@ export const updateProfileAction = (formData) => async (dispatch) => {
     dispatch({
       
       type: UPDATE_PROFILE_FAIL,
-      payload: error.response.data.message,
+      payload: error?.response?.data?.message,
     });
   }
 };

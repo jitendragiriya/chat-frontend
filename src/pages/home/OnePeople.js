@@ -33,10 +33,10 @@ const OnePeople = (props) => {
                   className="absolute top-0 left-0 object-contain h-full w-full"
                 ></img>
               ) : (
-                <>{props.people && props.people.username.slice(0, 1)}</>
+                <>{props.people && props.people.name.slice(0, 1)}</>
               )}
             </div>
-            <div>{props.people && props.people.username}</div>
+            <div>{props.people && props.people.name}</div>
           </div>
           <button
             className="w-fit absolut right-0 px-4 rounded bg-gradient-to-r from-green-500 to-green-400 text-white py-1"

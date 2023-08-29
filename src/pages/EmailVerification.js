@@ -44,7 +44,7 @@ const EmailVerification = (props) => {
     if (props.token && props.token.error) {
       notifyError(props.token.error);
       props.clear();
-    }
+    } 
   }, [props.token]);
 
   //verified page
