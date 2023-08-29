@@ -7,7 +7,7 @@ import {
 
 //verify profile email
 export const verifyEmail = (formbody) => async (dispatch) => {
-  let url = `${process.env.BASE_URL}/api/verify-email`;
+  let url = `${process.env.REACT_APP_BASE_URL}/api/verify-email`;
   try {
     dispatch({ type: VERIFY_EMAIL_REQUEST });
     const { data } = await axios.post(url, formbody, {

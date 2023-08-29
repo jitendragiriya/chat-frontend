@@ -8,7 +8,7 @@ import {
 
 // update profile
 export const updateProfileAction = (formData) => async (dispatch) => {
-  const url = `${process.env.BASE_URL}/api/profile/update`;
+  const url = `${process.env.REACT_APP_BASE_URL}/api/profile/update`;
   try {
     dispatch({ type: UPDATE_PROFILE_REQUEST });
     const { data } = await axios.put(url, formData, {
