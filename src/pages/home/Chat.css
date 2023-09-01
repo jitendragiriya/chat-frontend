@@ -1,4 +1,0 @@
-.textarea[contenteditable]:empty::before {
-  content: "Placeholder still possible";
-  color: gray;
-}

@@ -37,3 +37,13 @@ input[type=number] {
   background-color: #000000af;
   border-radius: 5px;
 }
+
+.googleLoginButtonContainer > button{
+  box-shadow: none !important;
+  border-radius: 10px !important;
+  background-color: #ffffff !important; 
+}
+
+.googleLoginButtonContainer > button > div{ 
+  background-color: transparent !important; 
+}

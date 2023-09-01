@@ -1,31 +1,27 @@
 import React, { useEffect } from "react";
 import "./App.css";
 import store from "./store";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import LoginPage from "./pages/LoginPage";
-import { HOME_PAGE, LOGIN, VERIFY_EMAIL } from "./constants/urls";
 import { authUser } from "./actions/auth";
-import ChatPage from "./pages/home/ChatPage";
-import ProtectedRoute from "./middlewares/ProtectedRoute";
-import EmailVerification from "./pages/EmailVerification";
+import ChatPage from "./pages/ChatPage";
+import { Helmet } from "react-helmet";
+import { useSelector } from "react-redux";
 
 function App() {
+  const { isAuthenticated } = useSelector((state) => state.User);
   useEffect(() => {
     store.dispatch(authUser());
   }, []);
+
   return (
     <>
-      <Router>
-        <Routes>
-          <Route path={LOGIN} element={<LoginPage />} />
-          <Route path={VERIFY_EMAIL} element={<EmailVerification />} />
-          <Route path={HOME_PAGE} element={<ProtectedRoute />}>
-            <Route path={HOME_PAGE} element={<ChatPage />} />
-          </Route>
-        </Routes>
-        <ToastContainer />
-      </Router>
+      <Helmet>
+        <title>Chat</title>
+      </Helmet>
+      {/* {isAuthenticated ? <ChatPage /> : <LoginPage />} */}
+      <ChatPage />
+      <ToastContainer />
     </>
   );
 }

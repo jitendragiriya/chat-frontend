@@ -1,12 +1,11 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
+import {
+  legacy_createStore as createStore,
+  combineReducers,
+  applyMiddleware,
+} from "redux";
 import thunk from "redux-thunk";
 
-// for development
-// import { composeWithDevTools } from "redux-devtools-extension";
-
-import { authUserReducer, loginWithOTPReducer } from "./reducers/auth";
-import { verifyEmailReducer } from "./reducers/verifyEmail";
-import { profileReducer } from "./reducers/profile";
+import { authUserReducer } from "./reducers/auth";
 import { getAllPleoplesReducer } from "./reducers/people";
 import {
   getAllMessagesReducer,
@@ -16,10 +15,7 @@ import {
 import { LOGOUT } from "./constants/auth";
 
 const appReducer = combineReducers({
-  Auth: loginWithOTPReducer,
   User: authUserReducer,
-  Profile: profileReducer,
-  VerifyEmail: verifyEmailReducer,
   Peoples: getAllPleoplesReducer,
   Message: sendMessageReducer,
   Conversations: getAllMessagesReducer,
