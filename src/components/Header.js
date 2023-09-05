@@ -121,20 +121,27 @@ const Header = ({ recepient, setRecepient }) => {
           disablePadding
           sx={{
             "& .MuiButtonBase-root": {
-              padding:0,
+              padding: 0,
               pl: ".5rem",
               pr: ".5rem",
             },
           }}
         >
           <ListItemButton>
-            <ListItemIcon>
-              <Avatar alt="Remy Sharp" src={recepient?.picture} />
-            </ListItemIcon>
-            <ListItemText
-              primary={recepient?.name}
-              secondary={"@" + recepient?.username}
-            />
+            {recepient?._id ? (
+              <>
+                <ListItemIcon>
+                  <Avatar alt="Remy Sharp" src={recepient?.picture} />
+                </ListItemIcon>
+                <ListItemText
+                  primary={recepient?.name ? recepient?.name : null}
+                  secondary={
+                    recepient?.username ? "@" + recepient?.username : null
+                  }
+                />
+              </>
+            ) : null}
+
             <div className="md:hidden">
               <ExpandMoreIcon />
             </div>

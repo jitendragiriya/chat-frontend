@@ -16,7 +16,7 @@ const SubmitChat = ({ recepient, socket }) => {
       senderId: user?._id,
       receiverId: recepient?._id,
       message,
-      time: new Date(),
+      sentAt: new Date().toString(),
     };
     socket.emit("privateMessage", chat);
     dispatch({

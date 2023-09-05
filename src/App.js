@@ -7,7 +7,8 @@ import { authUser } from "./actions/auth";
 import ChatPage from "./pages/ChatPage";
 import { Helmet } from "react-helmet";
 import { useSelector } from "react-redux";
-import { getAllPeoples } from "./actions/peoples";
+import { getAllPeoples } from "./actions/peoples"; 
+ 
 
 function App() {
   const { isAuthenticated, loading } = useSelector((state) => state.User);

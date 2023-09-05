@@ -54,8 +54,10 @@ const Sidebar = ({ setRecepient }) => {
                     <Avatar alt="Remy Sharp" src={item?.picture} />
                   </ListItemIcon>
                   <ListItemText
-                    primary={item?.name}
-                    secondary={"@" + item?.username}
+                    primary={item?.name ? item?.name : null}
+                    secondary={
+                        item?.username ? "@" + item?.username : null
+                    } 
                   />
                 </ListItemButton>
               </ListItem>

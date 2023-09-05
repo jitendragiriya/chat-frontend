@@ -14,7 +14,7 @@ const OurChats = () => {
       <div className="h-full max-h-[calc(100vh-170px)] p-2 overflow-y-auto">
         {typeof messages === "object" && messages?.length
           ? messages?.map((message, index) => (
-              <Message key={index} index={index} message={message} />
+              <Message key={index} message={message} />
             ))
           : null}
         <div className="scrollToThisdiv"></div>
