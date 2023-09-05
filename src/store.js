@@ -7,26 +7,16 @@ import thunk from "redux-thunk";
 
 import { authUserReducer } from "./reducers/auth";
 import { getAllPleoplesReducer } from "./reducers/people";
-import {
-  getAllMessagesReducer,
-  sendMessageReducer,
-  userDetailsReducer,
-} from "./reducers/chat";
-import { LOGOUT } from "./constants/auth";
+import { getAllMessagesReducer } from "./reducers/chat";
 
 const appReducer = combineReducers({
   User: authUserReducer,
   Peoples: getAllPleoplesReducer,
-  Message: sendMessageReducer,
-  Conversations: getAllMessagesReducer,
-  Knowuser: userDetailsReducer,
+  Messages: getAllMessagesReducer,
 });
 
 //reset reducer
 const rootReducer = (state, action) => {
-  if (action.type === LOGOUT) {
-    state = undefined;
-  }
   return appReducer(state, action);
 };
 

@@ -12,112 +12,21 @@ import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 
 import React, { useState } from "react";
-const peoples = [
-  {
-    _id: "64f17f83a5f0cf2386bdc6ec",
-    name: "Jitendra Giriya",
-    picture:
-      "https://lh3.googleusercontent.com/a/AAcHTtcbOt5iis0rH3nV3N1EqoHqx8Uq9qrkdYPRsRHm-xHe=s96-c",
-    email: "jitendragiriya71@gmail.com",
-  },
-  {
-    _id: "64f17f83a5f0cf2386bdc6ec",
-    name: "Jitendra Giriya",
-    picture:
-      "https://lh3.googleusercontent.com/a/AAcHTtcbOt5iis0rH3nV3N1EqoHqx8Uq9qrkdYPRsRHm-xHe=s96-c",
-    email: "jitendragiriya71@gmail.com",
-  },
-  {
-    _id: "64f17f83a5f0cf2386bdc6ec",
-    name: "Jitendra Giriya",
-    picture:
-      "https://lh3.googleusercontent.com/a/AAcHTtcbOt5iis0rH3nV3N1EqoHqx8Uq9qrkdYPRsRHm-xHe=s96-c",
-    email: "jitendragiriya71@gmail.com",
-  },
-  {
-    _id: "64f17f83a5f0cf2386bdc6ec",
-    name: "Jitendra Giriya",
-    picture:
-      "https://lh3.googleusercontent.com/a/AAcHTtcbOt5iis0rH3nV3N1EqoHqx8Uq9qrkdYPRsRHm-xHe=s96-c",
-    email: "jitendragiriya71@gmail.com",
-  },
-  {
-    _id: "64f17f83a5f0cf2386bdc6ec",
-    name: "Jitendra Giriya",
-    picture:
-      "https://lh3.googleusercontent.com/a/AAcHTtcbOt5iis0rH3nV3N1EqoHqx8Uq9qrkdYPRsRHm-xHe=s96-c",
-    email: "jitendragiriya71@gmail.com",
-  },
-  {
-    _id: "64f17f83a5f0cf2386bdc6ec",
-    name: "Jitendra Giriya",
-    picture:
-      "https://lh3.googleusercontent.com/a/AAcHTtcbOt5iis0rH3nV3N1EqoHqx8Uq9qrkdYPRsRHm-xHe=s96-c",
-    email: "jitendragiriya71@gmail.com",
-  },
-  {
-    _id: "64f17f83a5f0cf2386bdc6ec",
-    name: "Jitendra Giriya",
-    picture:
-      "https://lh3.googleusercontent.com/a/AAcHTtcbOt5iis0rH3nV3N1EqoHqx8Uq9qrkdYPRsRHm-xHe=s96-c",
-    email: "jitendragiriya71@gmail.com",
-  },
-  {
-    _id: "64f17f83a5f0cf2386bdc6ec",
-    name: "Jitendra Giriya",
-    picture:
-      "https://lh3.googleusercontent.com/a/AAcHTtcbOt5iis0rH3nV3N1EqoHqx8Uq9qrkdYPRsRHm-xHe=s96-c",
-    email: "jitendragiriya71@gmail.com",
-  },
-  {
-    _id: "64f17f83a5f0cf2386bdc6ec",
-    name: "Jitendra Giriya",
-    picture:
-      "https://lh3.googleusercontent.com/a/AAcHTtcbOt5iis0rH3nV3N1EqoHqx8Uq9qrkdYPRsRHm-xHe=s96-c",
-    email: "jitendragiriya71@gmail.com",
-  },
-  {
-    _id: "64f17f83a5f0cf2386bdc6ec",
-    name: "Jitendra Giriya",
-    picture:
-      "https://lh3.googleusercontent.com/a/AAcHTtcbOt5iis0rH3nV3N1EqoHqx8Uq9qrkdYPRsRHm-xHe=s96-c",
-    email: "jitendragiriya71@gmail.com",
-  },
-  {
-    _id: "64f17f83a5f0cf2386bdc6ec",
-    name: "Jitendra Giriya",
-    picture:
-      "https://lh3.googleusercontent.com/a/AAcHTtcbOt5iis0rH3nV3N1EqoHqx8Uq9qrkdYPRsRHm-xHe=s96-c",
-    email: "jitendragiriya71@gmail.com",
-  },
-  {
-    _id: "64f17f83a5f0cf2386bdc6ec",
-    name: "Jitendra Giriya",
-    picture:
-      "https://lh3.googleusercontent.com/a/AAcHTtcbOt5iis0rH3nV3N1EqoHqx8Uq9qrkdYPRsRHm-xHe=s96-c",
-    email: "jitendragiriya71@gmail.com",
-  },
-  {
-    _id: "64f17f83a5f0cf2386bdc6ec",
-    name: "Jitendra Giriya",
-    picture:
-      "https://lh3.googleusercontent.com/a/AAcHTtcbOt5iis0rH3nV3N1EqoHqx8Uq9qrkdYPRsRHm-xHe=s96-c",
-    email: "jitendragiriya71@gmail.com",
-  },
-  {
-    _id: "64f17f83a5f0cf2386bdc6ec",
-    name: "Jitendra Giriya",
-    picture:
-      "https://lh3.googleusercontent.com/a/AAcHTtcbOt5iis0rH3nV3N1EqoHqx8Uq9qrkdYPRsRHm-xHe=s96-c",
-    email: "jitendragiriya71@gmail.com",
-  },
-];
+import { useSelector } from "react-redux";
 
-const Header = ({ recepient }) => {
+const Header = ({ recepient, setRecepient }) => {
   const [open, setOpen] = useState(false);
+  const { peoples } = useSelector((state) => state.Peoples);
 
-  const openDrawer = () => setOpen(true);
+  const openDrawer = () => {
+    if (window.innerWidth < 768) setOpen(true);
+    else setOpen(false);
+  };
   const closeDrawer = () => setOpen(false);
+  const changeRecepient = (user) => {
+    setRecepient(user);
+    closeDrawer();
+  };
 
   const list = (anchor) => (
     <Box
@@ -126,8 +35,16 @@ const Header = ({ recepient }) => {
       }}
       role="presentation"
     >
-      <List sx={{ maxHeight: "calc(100vh - 37px)", overflow: "auto" }}>
-        <ListItem disablePadding>
+      <List sx={{ maxHeight: "calc(100vh - 29px)", overflow: "auto" }}>
+        <ListItem
+          disablePadding
+          sx={{
+            "& .MuiButtonBase-root": {
+              pl: ".5rem",
+              pr: ".5rem",
+            },
+          }}
+        >
           <ListItemButton>
             <ListItemIcon>
               <Avatar>
@@ -153,21 +70,32 @@ const Header = ({ recepient }) => {
             />
           </ListItemButton>
         </ListItem>
-        {peoples?.map((item, index) => (
-          <ListItem
-            key={index}
-            disablePadding
-            onClick={closeDrawer}
-            onKeyDown={closeDrawer}
-          >
-            <ListItemButton>
-              <ListItemIcon>
-                <Avatar alt="Remy Sharp" src={item?.picture} />
-              </ListItemIcon>
-              <ListItemText primary={item?.name} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        {typeof peoples === "object" && peoples?.length
+          ? peoples?.map((item, index) => (
+              <ListItem
+                key={index}
+                disablePadding
+                onClick={() => changeRecepient(item)}
+                onKeyDown={() => changeRecepient(item)}
+                sx={{
+                  "& .MuiButtonBase-root": {
+                    pl: ".5rem",
+                    pr: ".5rem",
+                  },
+                }}
+              >
+                <ListItemButton>
+                  <ListItemIcon>
+                    <Avatar alt="Remy Sharp" src={item?.picture} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={item?.name}
+                    secondary={"@" + item?.username}
+                  />
+                </ListItemButton>
+              </ListItem>
+            ))
+          : null}
       </List>
       <Box
         onClick={closeDrawer}
@@ -186,17 +114,30 @@ const Header = ({ recepient }) => {
   return (
     <>
       <div
-        className="w-full flex justify-between h-16 py-1 border-b border-b-[#333]"
+        className="w-full flex justify-between h-16 border-b border-b-[#333]"
         onClick={openDrawer}
       >
-        <ListItem disablePadding>
+        <ListItem
+          disablePadding
+          sx={{
+            "& .MuiButtonBase-root": {
+              padding:0,
+              pl: ".5rem",
+              pr: ".5rem",
+            },
+          }}
+        >
           <ListItemButton>
             <ListItemIcon>
               <Avatar alt="Remy Sharp" src={recepient?.picture} />
             </ListItemIcon>
-            <ListItemText primary={recepient?.name} />
-
-            <ExpandMoreIcon />
+            <ListItemText
+              primary={recepient?.name}
+              secondary={"@" + recepient?.username}
+            />
+            <div className="md:hidden">
+              <ExpandMoreIcon />
+            </div>
           </ListItemButton>
         </ListItem>
       </div>

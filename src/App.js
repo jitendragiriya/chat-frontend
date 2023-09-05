@@ -7,11 +7,14 @@ import { authUser } from "./actions/auth";
 import ChatPage from "./pages/ChatPage";
 import { Helmet } from "react-helmet";
 import { useSelector } from "react-redux";
+import { getAllPeoples } from "./actions/peoples";
 
 function App() {
-  const { isAuthenticated } = useSelector((state) => state.User);
+  const { isAuthenticated, loading } = useSelector((state) => state.User);
+  const { loading: peopleLoading } = useSelector((state) => state.Peoples);
   useEffect(() => {
     store.dispatch(authUser());
+    store.dispatch(getAllPeoples());
   }, []);
 
   return (
@@ -19,8 +22,11 @@ function App() {
       <Helmet>
         <title>Chat</title>
       </Helmet>
-      {/* {isAuthenticated ? <ChatPage /> : <LoginPage />} */}
-      <ChatPage />
+      <div className="bg-[#4f4f4f] min-h-screen overflow-auto w-screen h-screen min-w-full">
+        {loading || peopleLoading ? null : (
+          <>{isAuthenticated ? <ChatPage /> : <LoginPage />}</>
+        )}
+      </div>
       <ToastContainer />
     </>
   );

@@ -4,12 +4,12 @@ import {
   GET_ALL_USERS_FAIL,
   GET_ALL_USERS_REQ,
   GET_ALL_USERS_SUC,
-} from "../constants/user";
+} from "../constants";
 
 //get all peoples
 export const getAllPeoples = () => async (dispatch) => {
   const token = localStorage.getItem(TOKEN);
-  if(typeof token !== "string") return;
+  if (typeof token !== "string") return;
 
   const url = `${process.env.REACT_APP_BASE_URL}/api/people/all`;
   try {

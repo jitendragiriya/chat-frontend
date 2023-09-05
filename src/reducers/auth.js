@@ -1,10 +1,4 @@
-import {
-  AUTH_REQUEST,
-  AUTH_SUCCESS,
-  AUTH_FAIL, 
-} from "../constants/auth";
-import { CLEAR_ERROR } from "../constants/error";
- 
+import { AUTH_REQUEST, AUTH_SUCCESS, AUTH_FAIL } from "../constants";
 
 export const authUserReducer = (state = { user: {} }, action) => {
   switch (action.type) {
@@ -26,11 +20,7 @@ export const authUserReducer = (state = { user: {} }, action) => {
         error: action.payload,
         isAuthenticated: false,
       };
-    case CLEAR_ERROR:
-      return {
-        ...state,
-        error: null,
-      };
+
     default:
       return state;
   }

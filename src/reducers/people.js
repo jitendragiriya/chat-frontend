@@ -1,11 +1,10 @@
-import { CLEAR_ERROR } from "../constants/error";
 import {
   GET_ALL_USERS_FAIL,
   GET_ALL_USERS_REQ,
   GET_ALL_USERS_SUC,
-} from "../constants/user";
+} from "../constants";
 
-export const getAllPleoplesReducer = (state = { peoples: {} }, action) => {
+export const getAllPleoplesReducer = (state = { peoples: [] }, action) => {
   switch (action.type) {
     case GET_ALL_USERS_REQ:
       return {
@@ -22,11 +21,7 @@ export const getAllPleoplesReducer = (state = { peoples: {} }, action) => {
         loading: false,
         error: action.payload,
       };
-    case CLEAR_ERROR:
-      return {
-        ...state,
-        error: null,
-      };
+
     default:
       return state;
   }

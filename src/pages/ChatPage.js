@@ -1,67 +1,61 @@
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
-import { HiUserCircle } from "react-icons/hi";
-import { getAllPeoples } from "../actions/peoples";
 import Header from "../components/Header";
 import Chat from "./Chat";
+import { getAllMessages } from "../actions/chat";
+import io from "socket.io-client";
+import { USER_MESSAGES_SUCCESS } from "../constants";
+import Sidebar from "../components/Sidebar";
 
-const peoples = [
-  {
-    _id: "64f17f83a5f0cf2386bdc6ec",
-    name: "Jitendra Giriya",
-    picture:
-      "https://lh3.googleusercontent.com/a/AAcHTtcbOt5iis0rH3nV3N1EqoHqx8Uq9qrkdYPRsRHm-xHe=s96-c",
-    email: "jitendragiriya71@gmail.com",
-  },
-  {
-    _id: "64f17f83a5f0cf2386bdc6ec",
-    name: "Jitendra Giriya",
-    picture:
-      "https://lh3.googleusercontent.com/a/AAcHTtcbOt5iis0rH3nV3N1EqoHqx8Uq9qrkdYPRsRHm-xHe=s96-c",
-    email: "jitendragiriya71@gmail.com",
-  },
-  {
-    _id: "64f17f83a5f0cf2386bdc6ec",
-    name: "Jitendra Giriya",
-    picture:
-      "https://lh3.googleusercontent.com/a/AAcHTtcbOt5iis0rH3nV3N1EqoHqx8Uq9qrkdYPRsRHm-xHe=s96-c",
-    email: "jitendragiriya71@gmail.com",
-  },
-  {
-    _id: "64f17f83a5f0cf2386bdc6ec",
-    name: "Jitendra Giriya",
-    picture:
-      "https://lh3.googleusercontent.com/a/AAcHTtcbOt5iis0rH3nV3N1EqoHqx8Uq9qrkdYPRsRHm-xHe=s96-c",
-    email: "jitendragiriya71@gmail.com",
-  },
-  {
-    _id: "64f17f83a5f0cf2386bdc6ec",
-    name: "Jitendra Giriya",
-    picture:
-      "https://lh3.googleusercontent.com/a/AAcHTtcbOt5iis0rH3nV3N1EqoHqx8Uq9qrkdYPRsRHm-xHe=s96-c",
-    email: "jitendragiriya71@gmail.com",
-  },
-];
+const socket = io(`${process.env.REACT_APP_BASE_URL}`, {
+  withCredentials: true,
+});
 
-const ChatPage = (props) => {
+const ChatPage = () => {
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(false);
-  const [onlineUsers, setOnlineUsers] = useState([]);
   const { user } = useSelector((state) => state.User);
-  const [recepient, setRecepient] = useState(peoples[0] || null);
-  // const { peoples } = useSelector((state) => state.Peoples);
+  const { peoples } = useSelector((state) => state.Peoples);
+  const [recepient, setRecepient] = useState({});
+  const { messages } = useSelector((state) => state.Messages);
+
+  //connect to the socket
 
   useEffect(() => {
-    dispatch(getAllPeoples());
-  }, []);
+    if (user?._id) socket.emit("setUser", user?._id);
+  }, [user?._id]);
+
+  useEffect(() => {
+    socket.on("privateMessage", (message) => {
+      dispatch({
+        type: USER_MESSAGES_SUCCESS,
+        payload: messages?.length ? [...messages, message] : [message],
+      });
+    });
+  }, [messages]);
+
+  //set first user as recepient by default
+  useEffect(() => {
+    if (peoples?.length > 0) {
+      setRecepient(peoples[0]);
+    }
+  }, [peoples]);
+
+  //get recepient chats
+  useEffect(() => {
+    if (recepient?._id) {
+      dispatch(getAllMessages(recepient?._id));
+    }
+  }, [recepient]);
 
   return (
     <>
-      <div className="bg-white min-h-screen overflow-auto w-screen h-screen min-w-full">
-        <div className="h-full bg-white shadow-md rounded-md w-full overflow-hidden">
-          {/* header */}
-          <Header recepient={recepient}/>
-          <Chat/>
+      <div className="h-full bg-white w-full overflow-hidden mx-auto md:flex">
+        <div className="hidden md:block min-w-[300px] max-w-[300px]">
+          <Sidebar setRecepient={setRecepient} />
+        </div>
+        <div className="w-full">
+          <Header recepient={recepient} setRecepient={setRecepient} />
+          <Chat socket={socket} recepient={recepient} />
         </div>
       </div>
     </>

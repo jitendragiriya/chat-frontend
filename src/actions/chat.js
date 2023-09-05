@@ -1,66 +1,10 @@
 import axios from "axios";
-import {  TOKEN } from "../constants";
-import {
-  CLEAR_MSG_WINDOW_R,
-  CLEAR_MSG_WINDOW_S,
-  SEND_MESSAGE_FAIL,
-  SEND_MESSAGE_REQUEST,
-  SEND_MESSAGE_SUCCESS,
+import { TOKEN } from "../constants";
+import { 
   USER_MESSAGES_FAIL,
   USER_MESSAGES_REQUEST,
   USER_MESSAGES_SUCCESS,
-  GET_CHAT_USER_REQ,
-  GET_CHAT_USER_SUC,
-  GET_CHAT_USER_FAIL,
-} from "../constants/chat";
-
-export const sendMessage = (chatData) => async (dispatch) => {
-  const url = `${process.env.REACT_APP_BASE_URL}/api/conversation`;
-  try {
-    dispatch({ type: SEND_MESSAGE_REQUEST });
-    const { data } = await axios.post(url, chatData, {
-      headers: {
-        "Content-Type": "application/json",
-        "token": localStorage.getItem(TOKEN),
-      },
-      withCredentials: true,
-    });
-
-    dispatch({
-      type: SEND_MESSAGE_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: SEND_MESSAGE_FAIL,
-      payload: error?.response?.data?.message,
-    });
-  }
-};
-
-// get other user info
-export const getChatUser = (id) => async (dispatch) => {
-  const url = `${process.env.REACT_APP_BASE_URL}/api/user/${id}`;
-  try {
-    dispatch({ type: GET_CHAT_USER_REQ });
-    const { data } = await axios.get(url, {
-      headers: {
-        "Content-Type": "application/json",
-        "token": localStorage.getItem(TOKEN),
-      },
-      withCredentials: true,
-    });
-    dispatch({
-      type: GET_CHAT_USER_SUC,
-      payload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: GET_CHAT_USER_FAIL,
-      payload: error?.response?.data?.message,
-    });
-  }
-};
+} from "../constants";
 
 export const getAllMessages = (id) => async (dispatch) => {
   const url = `${process.env.REACT_APP_BASE_URL}/api/messages/all/${id}`;
@@ -69,7 +13,7 @@ export const getAllMessages = (id) => async (dispatch) => {
     const { data } = await axios.get(url, {
       headers: {
         "Content-Type": "application/json",
-        "token": localStorage.getItem(TOKEN),
+        token: localStorage.getItem(TOKEN),
       },
       withCredentials: true,
     });
@@ -83,13 +27,4 @@ export const getAllMessages = (id) => async (dispatch) => {
       payload: error?.response?.data?.message,
     });
   }
-};
-
-export const clearAllmsg = () => async (dispatch) => {
-  try {
-    dispatch({ type: CLEAR_MSG_WINDOW_R });
-    dispatch({
-      type: CLEAR_MSG_WINDOW_S,
-    });
-  } catch (error) {}
 };

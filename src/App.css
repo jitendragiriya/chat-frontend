@@ -1,5 +1,5 @@
 textarea,
-input{
+input {
   outline: none;
 }
 
@@ -24,7 +24,7 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
@@ -38,12 +38,15 @@ input[type=number] {
   border-radius: 5px;
 }
 
-.googleLoginButtonContainer > button{
+.googleLoginButtonContainer > button {
   box-shadow: none !important;
   border-radius: 10px !important;
-  background-color: #ffffff !important; 
+  background-color: #4f4f4f !important;
+  color: white !important;
 }
 
-.googleLoginButtonContainer > button > div{ 
-  background-color: transparent !important; 
+.googleLoginButtonContainer > button > div {
+  background-color: #4f4f4f !important;
 }
+
+ 

@@ -7,7 +7,7 @@ import {
   AUTH_REQUEST,
   AUTH_SUCCESS,
   AUTH_FAIL,
-} from "../constants/auth";
+} from "../constants";
 
 // checking user is already loggein or not
 export const authUser = () => async (dispatch) => {

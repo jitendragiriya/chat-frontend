@@ -1,10 +1,10 @@
-import React from "react"; 
+import React from "react";
 import LoginWithGoogle from "./LoginWithGoogle";
 
 const LoginPage = (props) => {
   return (
-    <> 
-      <div className="bg-[#3f3f3f] min-h-screen w-full p-4 flex items-center justify-center googleLoginButtonContainer">
+    <>
+      <div className="bg-white w-full h-full p-4 flex items-center justify-center googleLoginButtonContainer mx-auto">
         <LoginWithGoogle />
       </div>
     </>
