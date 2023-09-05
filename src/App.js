@@ -12,10 +12,11 @@ import { getAllPeoples } from "./actions/peoples";
 function App() {
   const { isAuthenticated, loading } = useSelector((state) => state.User);
   const { loading: peopleLoading } = useSelector((state) => state.Peoples);
+  const { auth } = useSelector((state) => state.GoogleAuth);
   useEffect(() => {
     store.dispatch(authUser());
     store.dispatch(getAllPeoples());
-  }, []);
+  }, [auth]);
 
   return (
     <>
